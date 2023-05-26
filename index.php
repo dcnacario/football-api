@@ -19,7 +19,6 @@ require('fetchAPI2.php');
         <thead>
     <tr>
         <th colspan="2">Home</th>     
-        <th>Odds</th>     
         <th></th>
         <th colspan="2">Away</th>
         <th>Date</th>
@@ -65,8 +64,11 @@ require('fetchAPI2.php');
         <td>
             <form method="POST" action="insert.php">
                 <input type="hidden" name="fixture_id" value="<?php echo $data1['fixture']['id']; ?>">
-                <label for="user_value">Value:</label>
-                <input type="text" name="user_value" id="user_value"><br>
+                <select name="user_value">
+                <?php foreach ($odds[$index]['bookmakers'][0]['bets'][0]['values'] as $value) : ?>
+                    <option value="<?php echo $value['odd']?>"><?php echo $value['value']; ?></option>
+                <?php endforeach; ?>
+                </select>
                 <label for="user_money">Money:</label>
                 <input type="text" name="user_money" id="user_money"><br>
                 <input type="submit" value="Submit">
